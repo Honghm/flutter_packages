@@ -17,40 +17,40 @@ class SelectorButton extends StatelessWidget {
   final String? locale;
   final bool isEnabled;
   final bool isScrollControlled;
-
+  final double? widthSelector;
   final ValueChanged<Country?> onCountryChanged;
 
-  const SelectorButton({
-    Key? key,
-    required this.countries,
-    required this.country,
-    required this.selectorConfig,
-    required this.selectorTextStyle,
-    required this.searchBoxDecoration,
-    required this.autoFocusSearchField,
-    required this.locale,
-    required this.onCountryChanged,
-    required this.isEnabled,
-    required this.isScrollControlled,
-  }) : super(key: key);
+  const SelectorButton(
+      {Key? key,
+      required this.countries,
+      required this.country,
+      required this.selectorConfig,
+      required this.selectorTextStyle,
+      required this.searchBoxDecoration,
+      required this.autoFocusSearchField,
+      required this.locale,
+      required this.onCountryChanged,
+      required this.isEnabled,
+      required this.isScrollControlled,
+      this.widthSelector})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: selectorConfig.height,
-      width: selectorConfig.width,
-      decoration: selectorConfig.decoration,
       child: selectorConfig.selectorType == PhoneInputSelectorType.DROPDOWN
           ? countries.isNotEmpty && countries.length > 1
               ? DropdownButtonHideUnderline(
                   child: DropdownButton<Country>(
                     key: Key(TestHelper.DropdownButtonKeyValue),
+                    icon: Container(),
                     hint: Item(
                       country: country,
                       showFlag: selectorConfig.showFlags,
                       useEmoji: selectorConfig.useEmoji,
                       leadingPadding: selectorConfig.leadingPadding,
                       trailingSpace: selectorConfig.trailingSpace,
+                      flagSize: selectorConfig.flagSize,
                       textStyle: selectorTextStyle,
                     ),
                     value: country,
@@ -60,6 +60,7 @@ class SelectorButton extends StatelessWidget {
                 )
               : Item(
                   country: country,
+                  flagSize: selectorConfig.flagSize,
                   showFlag: selectorConfig.showFlags,
                   useEmoji: selectorConfig.useEmoji,
                   leadingPadding: selectorConfig.leadingPadding,
@@ -89,16 +90,14 @@ class SelectorButton extends StatelessWidget {
                       }
                     }
                   : null,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Item(
-                  country: country,
-                  showFlag: selectorConfig.showFlags,
-                  useEmoji: selectorConfig.useEmoji,
-                  leadingPadding: selectorConfig.leadingPadding,
-                  trailingSpace: selectorConfig.trailingSpace,
-                  textStyle: selectorTextStyle,
-                ),
+              child: Item(
+                country: country,
+                flagSize: selectorConfig.flagSize,
+                showFlag: selectorConfig.showFlags,
+                useEmoji: selectorConfig.useEmoji,
+                leadingPadding: selectorConfig.leadingPadding,
+                trailingSpace: selectorConfig.trailingSpace,
+                textStyle: selectorTextStyle,
               ),
             ),
     );
@@ -113,6 +112,7 @@ class SelectorButton extends StatelessWidget {
         child: Item(
           key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
           country: country,
+          flagSize: selectorConfig.flagSize,
           showFlag: selectorConfig.showFlags,
           useEmoji: selectorConfig.useEmoji,
           textStyle: selectorTextStyle,
