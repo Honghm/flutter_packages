@@ -46,11 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             InternationalPhoneNumberInput(
-              height: 40,
-              widthSelector: 100,
-              selectorDecoration: BoxDecoration(
-                border: Border.all()
-              ),
+              
               onInputChanged: (PhoneNumber number) {
                 print(number.phoneNumber);
               },
@@ -60,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
               selectorConfig: SelectorConfig(
                 leadingPadding: 5,
                 selectorType: PhoneInputSelectorType.DROPDOWN,
-                flagSize: 30
               ),
               ignoreBlank: true,
               autoValidateMode: AutovalidateMode.disabled,
